@@ -10,6 +10,7 @@ const Home = async () => {
   return (
     <div className="flex h-full items-center justify-center">
       <UserButton showName />
+      <h1>testando agora</h1>
     </div>
   );
 };
