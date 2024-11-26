@@ -7,11 +7,22 @@ import {
 } from "lucide-react";
 import SummaryCard from "./summary-card";
 
-const SummaryCards = async () => {
+interface SummaryCards {
+  month: string;
+}
+
+const SummaryCards = async ({ month }: SummaryCards) => {
+  const where = {
+    date: {
+      gte: new Date(`2024-${month}-01`),
+      lte: new Date(`2024-${month}-31`),
+    },
+  };
   const depositsTotal = Number(
     (
       await db.transaction.aggregate({
         where: {
+          ...where,
           type: "DEPOSIT",
         },
         _sum: {
@@ -24,6 +35,7 @@ const SummaryCards = async () => {
     (
       await db.transaction.aggregate({
         where: {
+          ...where,
           type: "INVESTMENT",
         },
         _sum: {
@@ -36,6 +48,7 @@ const SummaryCards = async () => {
     (
       await db.transaction.aggregate({
         where: {
+          ...where,
           type: "EXPENSE",
         },
         _sum: {
