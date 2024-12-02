@@ -15,7 +15,7 @@ const SummaryCard = ({
   size = "sm",
 }: SummaryCardProps) => {
   return (
-    <Card>
+    <Card className={`${size === "lg" ? "bg-white bg-opacity-5" : ""}`}>
       <CardHeader className="flex-row items-center gap-4">
         {icon}
         <p

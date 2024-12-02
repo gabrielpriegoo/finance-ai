@@ -4,6 +4,8 @@ import Navbar from "../_components/navbar";
 import SummaryCards from "./_components/summary-cards";
 import TimeSelect from "./_components/time-select";
 import { isMatch } from "date-fns";
+import TransacationsPieCharts from "./_components/transacations-pie-charts";
+import { getDashboard } from "../_data/get-dashboard";
 
 interface Props {
   searchParams: {
@@ -23,6 +25,7 @@ const Home = async ({ searchParams: { month } }: Props) => {
     redirect("?month=01");
   }
 
+  const dashboard = await getDashboard(month);
   return (
     <>
       <Navbar />
@@ -31,7 +34,12 @@ const Home = async ({ searchParams: { month } }: Props) => {
           <h1 className="text-2xl font-bold">Dashboard</h1>
           <TimeSelect />
         </div>
-        <SummaryCards month={month} />
+        <div className="grid grid-cols-[2fr,1fr]">
+          <SummaryCards month={month} {...dashboard} />
+        </div>
+        <div className="grid grid-cols-3 grid-rows-1 gap-6">
+          <TransacationsPieCharts month={month} {...dashboard} />
+        </div>
       </div>
     </>
   );
