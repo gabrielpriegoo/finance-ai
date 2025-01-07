@@ -26,6 +26,7 @@ const Home = async ({ searchParams: { month } }: Props) => {
   }
 
   const dashboard = await getDashboard(month);
+
   return (
     <>
       <Navbar />
@@ -34,11 +35,16 @@ const Home = async ({ searchParams: { month } }: Props) => {
           <h1 className="text-2xl font-bold">Dashboard</h1>
           <TimeSelect />
         </div>
-        <div className="grid grid-cols-[2fr,1fr]">
-          <SummaryCards month={month} {...dashboard} />
-        </div>
-        <div className="grid grid-cols-3 grid-rows-1 gap-6">
-          <TransacationsPieCharts month={month} {...dashboard} />
+
+        <div className="grid-cols-[2fr, 1fr] grid">
+          <div className="flex flex-col space-y-6">
+            <div className="grid grid-cols-[2fr,1fr]">
+              <SummaryCards month={month} {...dashboard} />
+            </div>
+            <div className="grid grid-cols-3 grid-rows-1 gap-6">
+              <TransacationsPieCharts month={month} {...dashboard} />
+            </div>
+          </div>
         </div>
       </div>
     </>
