@@ -6,6 +6,7 @@ import TimeSelect from "./_components/time-select";
 import { isMatch } from "date-fns";
 import TransacationsPieCharts from "./_components/transacations-pie-charts";
 import { getDashboard } from "../_data/get-dashboard";
+import ExpensesPerCategory from "./_components/expenses-per-category";
 
 interface Props {
   searchParams: {
@@ -27,6 +28,8 @@ const Home = async ({ searchParams: { month } }: Props) => {
 
   const dashboard = await getDashboard(month);
 
+  console.log(dashboard);
+
   return (
     <>
       <Navbar />
@@ -38,11 +41,12 @@ const Home = async ({ searchParams: { month } }: Props) => {
 
         <div className="grid-cols-[2fr, 1fr] grid">
           <div className="flex flex-col space-y-6">
-            <div className="grid grid-cols-[2fr,1fr]">
-              <SummaryCards month={month} {...dashboard} />
-            </div>
+            <SummaryCards month={month} {...dashboard} />
             <div className="grid grid-cols-3 grid-rows-1 gap-6">
               <TransacationsPieCharts month={month} {...dashboard} />
+              <ExpensesPerCategory
+                expensesPerCategory={dashboard.totalExpensePerCategory}
+              />
             </div>
           </div>
         </div>
