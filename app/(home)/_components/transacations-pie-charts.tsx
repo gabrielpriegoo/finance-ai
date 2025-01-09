@@ -68,14 +68,14 @@ const TransacationsPieCharts = ({
     },
   ];
   return (
-    <Card className="flex flex-col p-12">
+    <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
         <CardTitle>Gráfico de transações</CardTitle>
         <CardDescription>
           {new Date(month).toLocaleDateString("pt-BR", { month: "long" })}
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex-1 pb-0">
+      <CardContent className="flex-1">
         <ChartContainer
           config={chartConfig}
           className="mx-auto aspect-square max-h-[250px]"

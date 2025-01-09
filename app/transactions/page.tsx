@@ -5,6 +5,7 @@ import { DataTable } from "../_components/ui/data-table";
 import { db } from "../_lib/prisma";
 import { transactions_columns } from "./_columns";
 import { redirect } from "next/navigation";
+import { ScrollArea } from "../_components/ui/scroll-area";
 
 const TransactionsPage = async () => {
   // acessar transações do banco de dados
@@ -20,13 +21,15 @@ const TransactionsPage = async () => {
   return (
     <>
       <Navbar />
-      <div className="space-y-6 p-6">
+      <div className="space-y-6 overflow-hidden p-6">
         {/* TITULO E BOTAO */}
         <div className="flex w-full items-center justify-between">
           <h1 className="text-2xl font-bold">Transações</h1>
           <AddTransactionButton />
         </div>
-        <DataTable columns={transactions_columns} data={transactions} />
+        <ScrollArea>
+          <DataTable columns={transactions_columns} data={transactions} />
+        </ScrollArea>
       </div>
     </>
   );
